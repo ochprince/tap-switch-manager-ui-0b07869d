@@ -33,8 +33,8 @@ export function StatisticsOverview({ switches }: StatisticsOverviewProps) {
     <div className="space-y-6">
       <h2 className="text-lg font-semibold text-gray-800">系统概览</h2>
       
-      {/* Status Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Status Cards - Single Column */}
+      <div className="grid grid-cols-1 gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">在线设备</CardTitle>
@@ -92,20 +92,20 @@ export function StatisticsOverview({ switches }: StatisticsOverviewProps) {
         </Card>
       </div>
 
-      {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Charts - Single Column Layout */}
+      <div className="grid grid-cols-1 gap-6">
         <Card>
           <CardHeader>
             <CardTitle>设备状态分布</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={200}>
+            <ResponsiveContainer width="100%" height={150}>
               <PieChart>
                 <Pie
                   data={pieData}
                   cx="50%"
                   cy="50%"
-                  outerRadius={80}
+                  outerRadius={60}
                   dataKey="value"
                   label={({ name, value }) => `${name}: ${value}`}
                 >
@@ -124,7 +124,7 @@ export function StatisticsOverview({ switches }: StatisticsOverviewProps) {
             <CardTitle>设备利用率</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={200}>
+            <ResponsiveContainer width="100%" height={150}>
               <BarChart data={utilizationData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
@@ -157,7 +157,7 @@ export function StatisticsOverview({ switches }: StatisticsOverviewProps) {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4 mt-3">
+                <div className="grid grid-cols-1 gap-4 mt-3">
                   <div>
                     <p className="text-sm text-gray-600">端口使用率</p>
                     <Progress 

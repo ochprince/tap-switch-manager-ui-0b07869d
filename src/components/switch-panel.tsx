@@ -145,18 +145,6 @@ export function SwitchPanel({ switches, selectedSwitch, onSwitchSelect, onSwitch
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-500">{switchData.model}</span>
-                {!isMultiSelect && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setIsMultiSelect(true);
-                    }}
-                  >
-                    批量配置
-                  </Button>
-                )}
               </div>
             </div>
 
