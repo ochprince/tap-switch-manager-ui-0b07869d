@@ -42,9 +42,9 @@ export function SwitchDashboard() {
         </div>
         
         <div className="p-6">
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
-            {/* Left Panel - Switch Physical View */}
-            <div className="space-y-4">
+          <div className="grid grid-cols-10 gap-8">
+            {/* Left Panel - Switch Physical View (70%) */}
+            <div className="col-span-7 space-y-4">
               <h2 className="text-lg font-semibold text-gray-800">设备面板</h2>
               <SwitchPanel 
                 switches={switches}
@@ -54,8 +54,8 @@ export function SwitchDashboard() {
               />
             </div>
 
-            {/* Right Panel - Statistics or Details */}
-            <div className="space-y-4">
+            {/* Right Panel - Statistics or Details (30%) */}
+            <div className="col-span-3 space-y-4">
               {selectedSwitch ? (
                 <SwitchDetails 
                   switchData={selectedSwitch}

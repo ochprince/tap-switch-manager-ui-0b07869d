@@ -2,9 +2,10 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Power, Wifi, WifiOff } from "lucide-react";
+import { Power } from "lucide-react";
 import { PortConfigModal } from "./port-config-modal";
 import { BatchConfigModal } from "./batch-config-modal";
+import { SVGPort } from "./svg-port";
 import { type SwitchData, type Port } from "@/lib/mock-data";
 
 interface SwitchPanelProps {
@@ -86,6 +87,12 @@ export function SwitchPanel({ switches, selectedSwitch, onSwitchSelect, onSwitch
     return selectedPorts.some(p => p.switchId === switchId && p.portId === portId);
   };
 
+  // Calculate grid columns based on port count
+  const getGridCols = (portCount: number) => {
+    if (portCount <= 24) return 12; // 2 rows
+    return 24; // 2 rows for 48 ports
+  };
+
   return (
     <div className="space-y-6">
       {/* Global Batch Config Button */}
@@ -125,49 +132,56 @@ export function SwitchPanel({ switches, selectedSwitch, onSwitchSelect, onSwitch
             {/* Switch Header */}
             <div
               onClick={() => onSwitchSelect(switchData)}
-              className="p-4 cursor-pointer"
+              className="p-4 cursor-pointer flex items-center justify-between"
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <span className="font-semibold text-lg">{switchData.name}</span>
-                  <Badge variant={switchData.powerStatus === "on" ? "default" : "secondary"}>
-                    <Power className={`w-3 h-3 mr-1 ${
-                      switchData.powerStatus === "on" ? "text-green-600" : "text-gray-400"
-                    }`} />
-                  </Badge>
-                </div>
+              <div className="flex items-center gap-3">
+                <span className="font-semibold text-lg">{switchData.name}</span>
+                <Badge 
+                  variant={switchData.powerStatus === "on" ? "default" : "secondary"}
+                  className={switchData.powerStatus === "on" ? "bg-green-500 text-white" : ""}
+                >
+                  <Power className={`w-3 h-3 mr-1`} />
+                </Badge>
+              </div>
+              <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-500">{switchData.model}</span>
+                {!isMultiSelect && (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsMultiSelect(true);
+                    }}
+                  >
+                    批量配置
+                  </Button>
+                )}
               </div>
             </div>
 
-            {/* Port Grid - 48 ports in 6 rows of 8 */}
+            {/* Port Grid */}
             <div className="px-4 pb-4">
-              <div className="grid grid-cols-8 gap-2">
+              <div 
+                className={`grid gap-1`}
+                style={{
+                  gridTemplateColumns: `repeat(${getGridCols(switchData.ports.length)}, minmax(0, 1fr))`
+                }}
+              >
                 {switchData.ports.map((port) => (
                   <div
                     key={port.id}
-                    onClick={() => handlePortClick(switchData.id, port)}
-                    className={`relative aspect-square border-2 rounded-lg cursor-pointer transition-all hover:shadow-md flex items-center justify-center ${
-                      port.status === "connected" 
-                        ? "border-green-500 bg-green-100" 
-                        : "border-gray-300 bg-gray-100"
-                    } ${
-                      isPortSelected(switchData.id, port.id)
-                        ? "ring-2 ring-blue-500" 
-                        : ""
-                    }`}
+                    className="flex flex-col items-center"
                   >
-                    {port.status === "connected" ? (
-                      <Wifi className="w-5 h-5 text-green-600" />
-                    ) : (
-                      <WifiOff className="w-5 h-5 text-gray-400" />
-                    )}
-                    <span className="absolute -bottom-6 text-xs text-gray-600 text-center w-full">
+                    <SVGPort
+                      isConnected={port.status === "connected"}
+                      hasPoe={port.poeEnabled}
+                      onClick={() => handlePortClick(switchData.id, port)}
+                      isSelected={isPortSelected(switchData.id, port.id)}
+                    />
+                    <span className="text-xs text-gray-600 mt-1">
                       {port.id}
                     </span>
-                    {port.poeEnabled && (
-                      <div className="absolute -top-1 -right-1 w-2 h-2 bg-yellow-400 rounded-full" />
-                    )}
                   </div>
                 ))}
               </div>

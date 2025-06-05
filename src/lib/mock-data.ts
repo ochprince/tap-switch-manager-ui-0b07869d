@@ -82,7 +82,7 @@ export const mockSwitchData: SwitchData[] = [
     powerStatus: "on",
     maxPower: 1500,
     currentPower: 800,
-    ports: generatePorts(48, 0.5),
+    ports: generatePorts(24, 0.5),
   },
   {
     id: "switch-003",
@@ -94,7 +94,7 @@ export const mockSwitchData: SwitchData[] = [
     powerStatus: "off",
     maxPower: 2500,
     currentPower: 0,
-    ports: generatePorts(48, 0),
+    ports: generatePorts(32, 0),
   },
   {
     id: "switch-004",
@@ -106,6 +106,6 @@ export const mockSwitchData: SwitchData[] = [
     powerStatus: "on",
     maxPower: 800,
     currentPower: 400,
-    ports: generatePorts(48, 0.4),
+    ports: generatePorts(16, 0.4),
   },
 ];

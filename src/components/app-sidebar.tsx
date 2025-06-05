@@ -8,6 +8,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarHeader,
 } from "@/components/ui/sidebar";
 import { Network, Settings, BarChart3, Shield, Users } from "lucide-react";
 
@@ -41,12 +42,19 @@ const menuItems = [
 
 export function AppSidebar() {
   return (
-    <Sidebar className="border-r border-gray-200">
+    <Sidebar className="border-r border-gray-200" collapsible="icon">
+      <SidebarHeader className="p-4 border-b border-gray-200">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+            <Network className="w-5 h-5 text-white" />
+          </div>
+          <span className="font-semibold text-gray-800 group-data-[collapsible=icon]:hidden">
+            TAP 网络分流器管理系统
+          </span>
+        </div>
+      </SidebarHeader>
       <SidebarContent className="bg-white">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-lg font-semibold text-gray-800 px-4 py-6">
-            TAP 网络分流器管理系统
-          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
@@ -58,10 +66,11 @@ export function AppSidebar() {
                         ? "bg-blue-50 text-blue-700 border-r-2 border-blue-600"
                         : "text-gray-600 hover:bg-gray-50"
                     }`}
+                    tooltip={item.title}
                   >
                     <div className="flex items-center gap-3">
                       <item.icon className="h-5 w-5" />
-                      <span className="font-medium">{item.title}</span>
+                      <span className="font-medium group-data-[collapsible=icon]:hidden">{item.title}</span>
                     </div>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
