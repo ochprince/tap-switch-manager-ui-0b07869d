@@ -50,8 +50,8 @@ export function SwitchDetails({ switchData }: SwitchDetailsProps) {
         </span>
       </div>
 
-      {/* Quick Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* Quick Stats - Single Column Layout */}
+      <div className="grid grid-cols-1 gap-4">
         <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-2">
@@ -115,7 +115,8 @@ export function SwitchDetails({ switchData }: SwitchDetailsProps) {
         </TabsList>
 
         <TabsContent value="basic" className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Single Column Layout for Basic Info */}
+          <div className="grid grid-cols-1 gap-4">
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">设备信息</CardTitle>
@@ -187,7 +188,8 @@ export function SwitchDetails({ switchData }: SwitchDetailsProps) {
               <CardTitle className="text-base">安全监控</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 gap-6">
+              {/* Single Column Layout for Security Info */}
+              <div className="grid grid-cols-1 gap-6">
                 <div className="space-y-3">
                   <h4 className="font-medium text-gray-800">访问控制</h4>
                   <div className="space-y-2">
@@ -228,13 +230,14 @@ export function SwitchDetails({ switchData }: SwitchDetailsProps) {
         </TabsContent>
 
         <TabsContent value="performance" className="space-y-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {/* Single Column Layout for Performance Charts */}
+          <div className="grid grid-cols-1 gap-4">
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">系统性能</CardTitle>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={200}>
+                <ResponsiveContainer width="100%" height={150}>
                   <LineChart data={performanceData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="time" />
@@ -252,7 +255,7 @@ export function SwitchDetails({ switchData }: SwitchDetailsProps) {
                 <CardTitle className="text-base">流量统计</CardTitle>
               </CardHeader>
               <CardContent>
-                <ResponsiveContainer width="100%" height={200}>
+                <ResponsiveContainer width="100%" height={150}>
                   <AreaChart data={trafficData}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="time" />
@@ -273,7 +276,8 @@ export function SwitchDetails({ switchData }: SwitchDetailsProps) {
               <CardTitle className="text-base">服务质量 (QoS)</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Single Column Layout for QoS Info */}
+              <div className="grid grid-cols-1 gap-6">
                 <div className="space-y-3">
                   <h4 className="font-medium text-gray-800">带宽分配</h4>
                   <div className="space-y-2">
