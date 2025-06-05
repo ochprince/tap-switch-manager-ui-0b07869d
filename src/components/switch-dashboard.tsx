@@ -37,8 +37,8 @@ export function SwitchDashboard() {
     <div className="space-y-6">
       <div className="bg-white rounded-lg shadow-sm border">
         <div className="border-b border-gray-200 px-6 py-4">
-          <h1 className="text-2xl font-bold text-gray-900">交换机概览</h1>
-          <p className="text-gray-600 mt-1">实时监控和管理网络交换机设备</p>
+          <h1 className="text-2xl font-bold text-gray-900">TAP概览</h1>
+          <p className="text-gray-600 mt-1">实时监控和管理网络TAP设备</p>
         </div>
         
         <div className="p-6">

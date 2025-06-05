@@ -13,7 +13,7 @@ import { Network, Settings, BarChart3, Shield, Users } from "lucide-react";
 
 const menuItems = [
   {
-    title: "交换机管理",
+    title: "TAP管理",
     icon: Network,
     isActive: true,
   },
